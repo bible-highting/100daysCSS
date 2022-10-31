@@ -1,3 +1,3 @@
-bible의 100daysCSS Challenge를 기록합니다.
+bible의 Create Chrome App by Vanilla Javascript를 기록합니다.
 
-link of 100dayscss <https://100dayscss.com/>
+link <https://nomadcoders.co/javascript-for-beginners/lobby>
