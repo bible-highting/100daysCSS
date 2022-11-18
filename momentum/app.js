@@ -8,8 +8,9 @@ function onLoginSubmit(event) {
   event.preventDefault(); //기본동작 방지, 여기서 기본동작은 새로고침
   loginForm.classList.add(HIDDEN_CLASSNAME);
   const username = loginInput.value;
+  localStorage.setItem("username", username);
   greeting.innerText = `Hello ${username}`;
-  greeting.classList.remove(HIDDEN_CLASSNAME)
+  greeting.classList.remove(HIDDEN_CLASSNAME);
 }
 
 loginForm.addEventListener("submit", onLoginSubmit);
