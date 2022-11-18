@@ -8,15 +8,13 @@ const USERNAME_KEY = "username"
 function onLoginSubmit(event) {
   event.preventDefault(); //기본동작 방지, 여기서 기본동작은 새로고침
   loginForm.classList.add(HIDDEN_CLASSNAME);
-
-  const username = loginInput.value;
-
-  localStorage.setItem(USERNAME_KEY, username);
-  paintGreetings(username);
+  localStorage.setItem(USERNAME_KEY, loginInput.value);
+  paintGreetings();
 }
 
-function paintGreetings(username) { // 중복되는 부분 함수화 리팩토링
-  greeting.innerText = `Hello ${username}`;
+function paintGreetings() { // 중복되는 부분 함수화 리팩토링
+  const savedUsername = localStorage.getItem(USERNAME_KEY);
+  greeting.innerText = `Hello ${savedUsername}`;
   greeting.classList.remove(HIDDEN_CLASSNAME);
 }
 
@@ -26,7 +24,7 @@ if ( savedUsername === null) {
   loginForm.classList.remove(HIDDEN_CLASSNAME);
   loginForm.addEventListener("submit", onLoginSubmit);
 } else {
-  paintGreetings(savedUsername);
+  paintGreetings();
 }
 
 
