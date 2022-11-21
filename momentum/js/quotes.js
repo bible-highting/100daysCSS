@@ -40,3 +40,11 @@ const quotes = [
     author:"정지음 <젊은 ADHD의 슬픔>",
   },
 ]
+
+const quote = document.querySelector("#quote span:first-child");
+const author = document.querySelector("#quote span:last-child");
+
+const todaysQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
+quote.innerText = todaysQuote.quote;
+author.innerText = todaysQuote.author;
