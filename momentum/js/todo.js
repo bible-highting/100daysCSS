@@ -2,6 +2,12 @@ const toDoForm = document.getElementById("todo-form");
 const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.getElementById("todo-list");
 
+const toDos = [];
+
+function saveToDos() {
+  localStorage.setItem("todos", JSON.stringify(toDos))
+}
+
 function deleteToDo(event) {
   const li = event.target.parentElement; //target : 이벤트가 일어난 대상
   li.remove();  
@@ -27,7 +33,9 @@ function handleToDoSubmit(event) {
   const newTodo = toDoInput.value;
 
   toDoInput.value = "";
+  toDos.push(newTodo);
   paintTodo(newTodo);
+  saveToDos();
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
