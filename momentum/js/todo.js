@@ -2,10 +2,12 @@ const toDoForm = document.getElementById("todo-form");
 const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.getElementById("todo-list");
 
-const toDos = [];
+const TODOS_KEY = "todos"
+
+let toDos = []; //update가능하도록 const -> let
 
 function saveToDos() {
-  localStorage.setItem("todos", JSON.stringify(toDos))
+  localStorage.setItem(TODOS_KEY, JSON.stringify(toDos))
 }
 
 function deleteToDo(event) {
@@ -39,3 +41,10 @@ function handleToDoSubmit(event) {
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
+
+const savedToDos = localStorage.getItem(TODOS_KEY);
+if (savedToDos) { // <=> savedToDos !== null
+  const parsedToDos = JSON.parse(savedToDos); // "[a,b,c]" -> [a,b,c] 문자형이 활용가능한 배열로 변화
+  toDos = parsedToDos;
+  parsedToDos.forEach(paintTodo); 
+}
