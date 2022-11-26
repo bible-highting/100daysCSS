@@ -13,12 +13,16 @@ function saveToDos() {
 function deleteToDo(event) {
   const li = event.target.parentElement; //target : 이벤트가 일어난 대상
   li.remove();  
+
+  toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
+  saveToDos();
 }
 
 function paintTodo(newTodo) {
   const li = document.createElement("li");
+  li.id = newTodo.id;
   const span = document.createElement("span");
-  span.innerText = newTodo;
+  span.innerText = newTodo.text;
 
   const button = document.createElement("button");
   button.innerText = "❌";
@@ -35,15 +39,20 @@ function handleToDoSubmit(event) {
   const newTodo = toDoInput.value;
 
   toDoInput.value = "";
-  toDos.push(newTodo);
-  paintTodo(newTodo);
+  const newTodoObj = {
+    text:newTodo,
+    id: Date.now(),
+
+  }
+  toDos.push(newTodoObj);
+  paintTodo(newTodoObj);
   saveToDos();
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
 
 const savedToDos = localStorage.getItem(TODOS_KEY);
-if (savedToDos) { // <=> savedToDos !== null
+if (savedToDos) { // <=> savedToDos !== null <=> saveToDos에 내용이 있다면
   const parsedToDos = JSON.parse(savedToDos); // "[a,b,c]" -> [a,b,c] 문자형이 활용가능한 배열로 변화
   toDos = parsedToDos;
   parsedToDos.forEach(paintTodo); 
